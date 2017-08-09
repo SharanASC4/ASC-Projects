@@ -1,0 +1,73 @@
+body{
+    width:100%;
+    background:#cccccc;
+    margin: 0 auto;
+       text-align: center;
+}
+
+.second{
+   
+    height: '200';
+    width: '200';
+
+
+}
+
+
+/* Ipad pro*/
+@media (max-width: 768px){
+    body {
+        width:100%;
+        background: red;
+    }
+
+
+}
+
+
+/* Iphone 6*/
+@media (max-width: 375px){
+    body {
+        width:100%;
+        background: red;
+    }
+
+
+}
+
+
+
+/* GS5 */
+@media (max-width: 360px){
+    body {
+        width:100%;
+        background: red;
+    }
+
+
+}
+
+
+
+
+/*.first{
+    background: gray;
+
+}
+
+
+.investor{
+    background: #00529F;
+    margin: 0 auto;
+}
+
+h1{
+    color: #EDBB00;
+    margin: 0%,50%,50%,50%;
+}
+p{
+    color:#EDBB00;
+}
+h1{
+    color: #EDBB00;
+}*/

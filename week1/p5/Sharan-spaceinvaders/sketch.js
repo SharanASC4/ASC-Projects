@@ -1,15 +1,17 @@
 function setup() {
     createCanvas(800, 800);
+    resetSketch();
     background('black');
     img = loadImage("images/invader.jpg");
     for (var i = 0; i < 10; i++) { //number of invaders
         alienObject[i] = new alien(i * 80 + 10, 60);// does the spacing and levels 
         alienObject[i + 10] = new alien(i * 80 + 10, 100);
+
     }
 
 }
 
-var x = 350;
+var x = 350;   // declaring 
 var y = 740;
 var w = 5;
 var h = 10;
@@ -17,6 +19,9 @@ var alienObject = [];
 var Projectile = [];
 var screen = 0;
 var score = 0;
+var lives = 3;
+var button = createButton("reset");
+button.mousePressed(resetSketch);
 
 function draw() {
     strokeWeight(0);
@@ -46,14 +51,11 @@ function draw() {
             if (Projectile[i].strike(alienObject[j])) { //removing the objects 
                 alienObject.splice(j, 1);
                 Projectile[i].delete = true;
-
+                if (Projectile[i].delete = true) {
+                    score = score + 10;
+                }
             }
-
-
         }
-
-
-
     }
 
     for (var i = Projectile.length - 1; i >= 0; i--) {
@@ -67,7 +69,7 @@ function draw() {
         alienObject[i].refresh();
 
 
-
+        // enter screen 
         if (screen == 0) {
             background('black');
             fill('white');
@@ -88,7 +90,7 @@ function draw() {
         fill(255);
         textSize(20);
         text('Score: ' + score, 60, 20);
-        text('Lives: ', 600, 20);
+        text('Lives: ' + lives, 600, 20);
 
         //instructions
         fill('red');
@@ -101,44 +103,48 @@ function draw() {
         text('Moves Left', 455, 795);
         text('Shoot', 625, 795)
 
-
+        if (alienObject.length < 1) {  // You won screen
+            fill(255);
+            strokeWeight(10);
+            stroke('blue');
+            textSize(100);
+            textSize("Congratulations, You Won!!", 150, 500);
+        }
     }
-
 }
+
 function mouseClicked() {
     screen = 1;
 }
 
-
-
-
-
-
+// temp for postioning to full screen
+function mousePressed() {
+    console.log("The mouse is at this x :" + mouseX + ".");
+    console.log("The mouse is at this y :" + mouseY + ".");
+}
 
 function alien(xC, yC, ) {   // the aliens and the size
     this.xC = xC;
     this.yC = yC;
-    this.xMove = 1;
-    this.yMove = 0;
+    this.xMove = 2;
+    this.yMove = 0.3;  // speed of the movement
     this.draw = function () {
         image(img, this.xC, this.yC, 46, 46);
     }
     this.refresh = function () { //movement of invaders
-        this.x += this.xMove;
-        this.y += this.yMove;
+        this.xC += this.xMove;
+        this.yC += this.yMove;
         for (var i = 0; i < alienObject.length; i++) {
-            if (alienObject[i].xC > 800) {
-                this.xMove = -1;
+            if (alienObject[i].xC > 765) { // boundry of aliens postions 
+                this.xMove = -1.5;
             }
             if (alienObject[i].xC < 0) {
-                this.xMove = 1;
+                this.xMove = 1.5;
 
             }
         }
     }
-
 }
-
 
 function projectile1(x, y, width, height) {
     this.x = x + 35;
@@ -154,15 +160,22 @@ function projectile1(x, y, width, height) {
             return false;
         }
     }
+}
 
+// if (d < 50) {
+//     score = score + 10;
+
+// }
+
+function resetSketch(){
+function keyPressed() {
+    if (keyCode === 116) {
+     
+        }
+    }
 }
 
 
-
-if (d < 50) {
-    score = score + 10;
-
-}
 
 
 function keyPressed() {
@@ -179,13 +192,7 @@ function keyPressed() {
         }
         if (keyCode === RIGHT_ARROW) {
             x = x + 20;
-
         }
-
     }
-
-
-
-
 }
 
